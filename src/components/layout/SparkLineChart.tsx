@@ -96,4 +96,4 @@ const SparkLineChart = () => {
   );
 };
 export default SparkLineChart;
-// sparkline chart
+// sparkline chart.
