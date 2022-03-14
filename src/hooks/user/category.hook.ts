@@ -10,9 +10,8 @@ import queryClient from '~/http/queryClient';
 import { User } from '~/interface/auth.interface';
 import { MutationOptions } from '~/interface/common.interface';
 
-const KEY = 'admin-users';
+const KEY = 'category';
 
-export const useAdminUserList = () => useFetchList<User[]>([KEY], ADMIN_USER.BASE);
 export const useCategoryList = () => useFetchList<any>([KEY], CATEGORY_PRODUCT.BASE);
 
 export const useAdminItem = (id: string | number) =>
@@ -33,6 +32,6 @@ export const useSaveAdminUser = (options?: MutationOptions) => {
   });
 };
 
-export const useDeleteAdminUser = (options?: MutationOptions) => {
-  return useDeleteRequest(KEY, ADMIN_USER.SINGLE, options);
+export const useDeleteCategory = (options?: MutationOptions) => {
+  return useDeleteRequest(KEY, CATEGORY_PRODUCT.SINGLE, options);
 };

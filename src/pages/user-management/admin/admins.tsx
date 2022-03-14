@@ -12,11 +12,11 @@ const AdminsListingPage = () => {
   const navigate = useNavigate();
   const { isLoading, items: admins, pagination } = useAdminUserList();
   const { isLoading: isDeleting, mutate: deleteAdmin } = useDeleteAdminUser();
-
   const handleConfirmDelete = (id: number) => {
     setDeletingId(id);
     deleteAdmin(id);
   };
+  console.log(useDeleteAdminUser());
 
   const columns: GridColumns = [
     {

@@ -8,6 +8,8 @@ import { lazy } from 'react';
 import { RouteItem } from '../interface/common.interface';
 import SparkLine from '~/components/layout/SparkLine';
 import SparkLineChart from '~/components/layout/SparkLineChart';
+import Categories from '~/pages/categories/categories';
+import CreateCategoriesPage from '~/pages/categories/CreateCategoriesPage';
 const HomePage = lazy(() => import('../pages/home'));
 const SamplePage = lazy(() => import('../pages/sample'));
 const AdminsListingPage = lazy(() => import('~/pages/user-management/admin/admins'));
@@ -51,9 +53,10 @@ export const drawerRoutes: Array<RouteItem> = [
     children: [
       {
         id: 'post-category',
-        path: '/post-category',
+        path: '/categories',
         icon: <TableRows />,
-        element: <SamplePage />,
+        // element: <SamplePage />,
+        element: <Categories />,
         title: 'Post Category',
       },
       {
@@ -142,6 +145,12 @@ export const appRoutes: Array<RouteItem> = [
     title: 'Create Admin',
   },
   {
+    id: 'create-category',
+    path: '/category/create',
+    element: <CreateCategoriesPage />,
+    title: 'Create Admin',
+  },
+  {
     id: 'create-admin',
     path: '/admin2/create',
     element: <CreateAdminPageTwo />,
@@ -158,6 +167,12 @@ export const appRoutes: Array<RouteItem> = [
     path: '/admin2/:id/edit',
     element: <EditAdminTwo />,
     title: 'Edit Admin',
+  },
+  {
+    id: 'categories',
+    path: '/categories',
+    element: <Categories />,
+    title: 'Categories',
   },
 ];
 
