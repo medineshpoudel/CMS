@@ -6,7 +6,7 @@ import Linkedin from '../images/linkedin.png';
 import Instagram from '../images/instagram.png';
 import { lazy } from 'react';
 import { RouteItem } from '../interface/common.interface';
-import SparkLine from '~/components/layout/SparkLine';
+
 import SparkLineChart from '~/components/layout/SparkLineChart';
 import Categories from '~/pages/categories/categories';
 import CreateCategoriesPage from '~/pages/categories/CreateCategoriesPage';
@@ -19,6 +19,7 @@ const CreateAdminPageTwo = lazy(() => import('~/pages/user-management/admin/crea
 const EditAdminPage = lazy(() => import('~/pages/user-management/admin/edit-admin'));
 const EditAdminTwo = lazy(() => import('~/pages/user-management/admin/EditAdminTwo'));
 const RoleSelect = lazy(() => import('~/components/role/Role'));
+const Chat = lazy(() => import('~/pages/chats/Chat'));
 export const drawerRoutes: Array<RouteItem> = [
   {
     id: 'dashboard',
@@ -88,6 +89,13 @@ export const drawerRoutes: Array<RouteItem> = [
     icon: <Person />,
     element: <RoleSelect />,
     title: 'Role',
+  },
+  {
+    id: 'admin',
+    path: '/chat',
+    icon: <Person />,
+    element: <Chat />,
+    title: 'Chat',
   },
 ];
 export const drawerAppRoutes: Array<RouteItem> = [
