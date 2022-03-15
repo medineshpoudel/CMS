@@ -19,20 +19,28 @@ const friendMsg = [
 ];
 const userMsg = [
   {
-    id: '1',
-    time: '3:30',
-    msg: 'hello where are you',
+    id: '',
+    msg_date: '',
+    message: '',
   },
 ];
 const UserChat = () => {
-  const [msg, setMsg] = useState('');
-  const [datas, setDatas] = useState(friendMsg);
+  const [msgField, setMsgField] = useState('');
+  const [userData, setUserData] = useState<any>(userMsg);
+  const [message, setMessage] = useState('');
   const submitHandler = (e: any) => {
     e.preventDefault();
-    setDatas([
-      ...datas,
-      { id: '20', msg, time: `${new Date().getHours()}:${new Date().getMinutes()}` },
-    ]);
+    const data = {
+      id: Math.floor(Math.random() * 100),
+      message: message,
+      msg_date: new Date('March 10, 2022 02:35:30'),
+    };
+    if (message == '') {
+      console.log('no msg');
+    } else {
+      setMsgField('');
+      setUserData([...userData, data]);
+    }
   };
   return (
     <Grid item xs={8} sx={{ height: '79vh', backgroundColor: 'white', ml: -3, borderRadius: 5 }}>
@@ -64,17 +72,88 @@ const UserChat = () => {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} sx={{ height: '55vh' }}>
-          {datas.map((messages) => (
+        <Grid
+          item
+          xs={12}
+          sx={{
+            height: '55vh',
+            overflow: 'auto',
+          }}
+        >
+          {friendMsg.map((messages) => (
             <Box
               key={messages.id}
-              sx={{ background: 'green', ml: 3, mb: 1, width: 200, borderRadius: 5, p: 2 }}
+              sx={{ background: '#ffe0b2', ml: 3, mb: 1, width: 200, borderRadius: 5, p: 2 }}
             >
               <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
               <Typography>{messages.msg}</Typography>
               <Typography>{messages.time}</Typography>
             </Box>
           ))}
+          {userData.map((messages: any) =>
+            messages.id ? (
+              <Box
+                key={messages.id}
+                sx={{ background: '#c8e6c9', mb: 1, width: 200, borderRadius: 5, p: 2, ml: 90 }}
+              >
+                <Typography sx={{ fontWeight: 600 }}>You</Typography>
+                <Typography>{messages.message}</Typography>
+                <Typography sx={{ mt: -3 }}>
+                  {(() => {
+                    if (
+                      new Date().getFullYear() === messages.msg_date.getFullYear() &&
+                      new Date().getMonth() === messages.msg_date.getMonth() &&
+                      new Date().getDate() === messages.msg_date.getDate()
+                    ) {
+                      return (
+                        <h5>{`${messages.msg_date.getHours()}:${messages.msg_date.getMinutes()}`}</h5>
+                      );
+                    } else if (
+                      new Date().getFullYear() === messages.msg_date.getFullYear() &&
+                      new Date().getMonth() === messages.msg_date.getMonth() &&
+                      new Date().getDate() - messages.msg_date.getDate() === 1
+                    ) {
+                      return <h5>Yesterday</h5>;
+                    } else if (
+                      new Date().getFullYear() === messages.msg_date.getFullYear() &&
+                      new Date().getMonth() === messages.msg_date.getMonth() &&
+                      new Date().getDate() - messages.msg_date.getDate() > 1
+                    ) {
+                      return (
+                        <h5>
+                          {messages.msg_date.getFullYear()}-{messages.msg_date.getMonth()}-
+                          {messages.msg_date.getDate()} {messages.msg_date.getHours()}:
+                          {messages.msg_date.getMinutes()}
+                        </h5>
+                      );
+                    } else if (
+                      new Date().getFullYear() === messages.msg_date.getFullYear() &&
+                      new Date().getMonth() - messages.msg_date.getMonth() === 1
+                    ) {
+                      return <h5>Month ago</h5>;
+                    } else if (
+                      new Date().getFullYear() === messages.msg_date.getFullYear() &&
+                      new Date().getMonth() - messages.msg_date.getMonth() > 1
+                    ) {
+                      return (
+                        <h5>{new Date().getMonth() - messages.msg_date.getMonth()} months ago</h5>
+                      );
+                    } else if (new Date().getFullYear() - messages.msg_date.getFullYear() === 1) {
+                      return <h5> 1 year ago</h5>;
+                    } else {
+                      return (
+                        <h5>
+                          {new Date().getFullYear() - messages.msg_date.getFullYear()}years ago
+                        </h5>
+                      );
+                    }
+                  })()}
+                </Typography>
+              </Box>
+            ) : (
+              ''
+            )
+          )}
         </Grid>
 
         <Grid item xs={9}>
@@ -97,8 +176,10 @@ const UserChat = () => {
               placeholder="Enter Message"
               inputProps={{ 'aria-label': 'Search' }}
               onChange={(e) => {
-                setMsg(e.target.value);
+                setMessage(e.target.value);
+                setMsgField(e.target.value);
               }}
+              value={msgField}
             />
           </Paper>
         </Grid>
