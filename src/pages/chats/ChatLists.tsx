@@ -1,4 +1,4 @@
-import { purple, indigo } from '@mui/material/colors';
+import { indigo } from '@mui/material/colors';
 import { Grid, Box, Typography, Button } from '@mui/material';
 //
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
